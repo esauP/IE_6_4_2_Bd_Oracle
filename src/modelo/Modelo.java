@@ -14,7 +14,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Víctor. Proyecto taller.
  * @version 1.0
  */
-public class modeloCliente extends database {
+public class Modelo extends database {
 
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableEjemplo;
@@ -22,7 +22,7 @@ public class modeloCliente extends database {
     /**
      * Constructor vacío de la clase
      */
-    public modeloCliente() {
+    public Modelo() {
     }
 
     /**
@@ -118,7 +118,7 @@ public class modeloCliente extends database {
      *
      * @return devuelve el modelo de tabla
      */
-    public DefaultTableModel getTablaCliente() {
+    public DefaultTableModel getTablaProyectos() {
         DefaultTableModel tablemodel = new DefaultTableModel();
         Statement s;
         ResultSet rs = null;

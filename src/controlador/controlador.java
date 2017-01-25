@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import modelo.Modelo;
 import vista.*;
 
 /**
@@ -21,7 +22,9 @@ public class controlador implements ActionListener, MouseListener {
 
     // Intanciamos todas las vistas
     home vistaHome;
-
+    
+    //instanciamos el modelo
+    Modelo mo = new Modelo();
     /**
      * Constructor de la clase
      *
@@ -63,6 +66,7 @@ public class controlador implements ActionListener, MouseListener {
         this.vistaHome.btnSalir.addActionListener(this);
 
         this.vistaHome.TableProyectos.addMouseListener(this);
+        this.vistaHome.TableProyectos.setModel(mo.getTablaProyectos());
         this.vistaHome.TablePiezas.addMouseListener(this);
     }
 
