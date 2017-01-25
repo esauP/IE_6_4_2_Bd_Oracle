@@ -45,9 +45,9 @@ public class home extends javax.swing.JFrame {
         TableProyectos = new javax.swing.JTable();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel14 = new javax.swing.JLabel();
-        jTextField15 = new javax.swing.JTextField();
+        TxtCodigoPieza = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
-        jTextField16 = new javax.swing.JTextField();
+        TxtNombrePieza = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         TablePiezas = new javax.swing.JTable();
@@ -192,11 +192,11 @@ public class home extends javax.swing.JFrame {
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jLabel14)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TxtCodigoPieza, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(18, 18, 18)
                             .addComponent(jLabel16)
                             .addGap(18, 18, 18)
-                            .addComponent(jTextField16, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TxtNombrePieza, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(18, 18, 18)
                             .addComponent(jLabel17)
                             .addGap(18, 18, 18)
@@ -263,9 +263,9 @@ public class home extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
-                    .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TxtCodigoPieza, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel16)
-                    .addComponent(jTextField16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TxtNombrePieza, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(SpinnerPrecioPi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -349,9 +349,11 @@ public class home extends javax.swing.JFrame {
     public javax.swing.JTextField TxtApellidosProveedor;
     public javax.swing.JTextField TxtCiudadProy;
     public javax.swing.JTextField TxtCodProveedor;
+    public javax.swing.JTextField TxtCodigoPieza;
     public javax.swing.JTextField TxtCodigoProy;
     public javax.swing.JTextField TxtDescripcionPi;
     public javax.swing.JTextField TxtDirecProveedor;
+    public javax.swing.JTextField TxtNombrePieza;
     public javax.swing.JTextField TxtNombreProveedor;
     public javax.swing.JTextField TxtNombreProy;
     public javax.swing.JButton btnSalir;
@@ -374,7 +376,5 @@ public class home extends javax.swing.JFrame {
     public javax.swing.JScrollPane jScrollPane3;
     public javax.swing.JScrollPane jScrollPane4;
     public javax.swing.JSeparator jSeparator1;
-    public javax.swing.JTextField jTextField15;
-    public javax.swing.JTextField jTextField16;
     // End of variables declaration//GEN-END:variables
 }

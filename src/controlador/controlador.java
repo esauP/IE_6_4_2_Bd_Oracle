@@ -22,9 +22,10 @@ public class controlador implements ActionListener, MouseListener {
 
     // Intanciamos todas las vistas
     home vistaHome;
-    
+
     //instanciamos el modelo
     Modelo mo = new Modelo();
+
     /**
      * Constructor de la clase
      *
@@ -57,12 +58,12 @@ public class controlador implements ActionListener, MouseListener {
         this.vistaHome.BtnActualizaProyecto.addActionListener(this);
         this.vistaHome.BtnBorraProyecto.addActionListener(this);
         this.vistaHome.BtnLimpiarTxtProyecto.addActionListener(this);
-        
+
         this.vistaHome.BtnAniadePieza.addActionListener(this);
         this.vistaHome.BtnActualizaPieza.addActionListener(this);
         this.vistaHome.BtnBorraPieza.addActionListener(this);
         this.vistaHome.BtnLimpiaTxtPieza.addActionListener(this);
-       
+
         this.vistaHome.btnSalir.addActionListener(this);
 
         this.vistaHome.TableProyectos.addMouseListener(this);
@@ -70,37 +71,87 @@ public class controlador implements ActionListener, MouseListener {
         this.vistaHome.TablePiezas.addMouseListener(this);
     }
 
-  
     //Control de eventos de los controles que tienen definido un "ActionCommand"
     public void actionPerformed(ActionEvent e) {
 
         /*----------------------------------------------------------------------------*/
         //Proyectos
-        if(e.getSource() == this.vistaHome.BtnAniadeProyecto){
-            
+        if (e.getSource() == this.vistaHome.BtnAniadeProyecto) {
+
+            if (mo.InsertaProyecto(this.vistaHome.TxtCodigoProy.getText(), this.vistaHome.TxtNombreProy.getText(), this.vistaHome.TxtCiudadProy.getText())) {
+
+            }
         }
-        if (e.getSource() == this.vistaHome.BtnActualizaProyecto){
-            
+        if (e.getSource() == this.vistaHome.BtnActualizaProyecto) {
+            if (mo.ActualizaProyecto(this.vistaHome.TxtCodigoProy.getText(), this.vistaHome.TxtNombreProy.getText(), this.vistaHome.TxtCiudadProy.getText())) {
+
+            }
         }
-        if (e.getSource() == this.vistaHome.BtnBorraProyecto){
-            
+        if (e.getSource() == this.vistaHome.BtnBorraProyecto) {
+            if (mo.BorraProyecto(this.vistaHome.TxtCodigoProy.getText())) {
+
+            }
         }
-        if (e.getSource() == this.vistaHome.BtnLimpiarTxtProyecto){
-            
+        if (e.getSource() == this.vistaHome.BtnLimpiarTxtProyecto) {
+            this.vistaHome.TxtCodigoProy.setText("");
+            this.vistaHome.TxtNombreProy.setText("");
+            this.vistaHome.TxtCiudadProy.setText("");
         }
         /*----------------------------------------------------------------------------*/
         //Piezas
-        if (e.getSource() == this.vistaHome.BtnAniadePieza){
-            
+        if (e.getSource() == this.vistaHome.BtnAniadePieza) {
+            String codP, nomP, precP, cantP, descP, codPr, nomPr, apePr, direcPr;
+
+            codP = this.vistaHome.TxtCodigoPieza.getText();
+            nomP = this.vistaHome.TxtNombrePieza.getText();
+            descP = this.vistaHome.TxtDescripcionPi.getText();
+            //precP = coger valor de spinner
+            //cantP = coger calor de spinner
+            codPr = this.vistaHome.TxtCodProveedor.getText();
+            nomPr = this.vistaHome.TxtNombreProveedor.getText();
+            apePr = this.vistaHome.TxtApellidosProveedor.getText();
+            direcPr = this.vistaHome.TxtDirecProveedor.getText();
+
+            if (mo.InsertaPieza(codP, nomP, descP, precP, cantP, codPr, nomPr, apePr, direcPr)) {
+
+            }
         }
-        if (e.getSource() == this.vistaHome.BtnActualizaPieza){
-            
+        if (e.getSource() == this.vistaHome.BtnActualizaPieza) {
+            String codP, nomP, precP, cantP, descP, codPr, nomPr, apePr, direcPr;
+
+            codP = this.vistaHome.TxtCodigoPieza.getText();
+            nomP = this.vistaHome.TxtNombrePieza.getText();
+            descP = this.vistaHome.TxtDescripcionPi.getText();
+            //precP = coger valor de spinner
+            //cantP = coger calor de spinner
+            codPr = this.vistaHome.TxtCodProveedor.getText();
+            nomPr = this.vistaHome.TxtNombreProveedor.getText();
+            apePr = this.vistaHome.TxtApellidosProveedor.getText();
+            direcPr = this.vistaHome.TxtDirecProveedor.getText();
+
+            if (mo.ActualizaPieza(codP, nomP, descP, precP, cantP, codPr, nomPr, apePr, direcPr)) {
+
+            }
         }
-        if (e.getSource() == this.vistaHome.BtnBorraPieza){
-            
+        if (e.getSource() == this.vistaHome.BtnBorraPieza) {
+            String codP, codProy;
+
+            codP = this.vistaHome.TxtCodigoPieza.getText();
+            codProy = this.vistaHome.TxtCodigoProy.getText();
+            if (mo.BorrarPieza(codP, codProy)) {
+
+            }
         }
-        if (e.getSource() == this.vistaHome.BtnLimpiaTxtPieza){
-            
+        if (e.getSource() == this.vistaHome.BtnLimpiaTxtPieza) {
+            this.vistaHome.TxtCodigoPieza.setText("");
+            this.vistaHome.TxtNombrePieza.setText("");
+            this.vistaHome.TxtDescripcionPi.setText("");
+            //precP = coger valor de spinner
+            //cantP = coger calor de spinner
+            this.vistaHome.TxtCodProveedor.setText("");
+            this.vistaHome.TxtNombreProveedor.setText("");
+            this.vistaHome.TxtApellidosProveedor.setText("");
+            this.vistaHome.TxtDirecProveedor.setText("");
         }
         /*----------------------------------------------------------------------------*/
         //Botón de Salir
@@ -116,8 +167,8 @@ public class controlador implements ActionListener, MouseListener {
         }
 
     }
-    
-      public void mouseClicked(MouseEvent e) {
+
+    public void mouseClicked(MouseEvent e) {
     }
 
     public void mousePressed(MouseEvent e) {
@@ -133,4 +184,3 @@ public class controlador implements ActionListener, MouseListener {
     }
 
 }
-

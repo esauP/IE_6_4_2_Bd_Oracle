@@ -177,4 +177,28 @@ public class Modelo extends database {
 
     }
 
+    public boolean InsertaProyecto(String text, String text0, String text1) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public boolean ActualizaProyecto(String text, String text0, String text1) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public boolean BorraProyecto(String text) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public boolean InsertaPieza(String codP, String nomP, String descP, String precP, String cantP, String codPr, String nomPr, String apePr, String direcPr) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public boolean ActualizaPieza(String codP, String nomP, String descP, String precP, String cantP, String codPr, String nomPr, String apePr, String direcPr) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public boolean BorrarPieza(String codP, String codProy) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

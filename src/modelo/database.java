@@ -14,14 +14,6 @@ import java.sql.SQLException;
  * @version 1.0
  */
 public class database {
-
-//    /* DATOS PARA LA CONEXION */
-//    private String db="web";
-//    private String user="dam43";
-//    private String password="salesianas";
-//    //79.148.236.236
-//    //192.168.28.3
-//    private String url="jdbc:mysql://192.168.28.3/";
     private Connection conn = null;
 //    
 
@@ -34,8 +26,7 @@ public class database {
             //obtenemos el driver de para mysql
             Class.forName("oracle.jdbc.driver.OracleDriver");
             //obtenemos la conexión
-            conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","system","0045");
-            //conn = DriverManager.getConnection(this.url, this.user, this.password);
+            conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","system","root");
             System.out.println("conectazo");
         } catch (SQLException e) {
             System.err.println(e.getMessage());
