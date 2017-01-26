@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
@@ -39,7 +40,7 @@ public class controlador implements ActionListener, MouseListener {
     /**
      * Inicia el skin y las diferentes variables que se utilizan
      */
-    public void iniciar() {
+    public void iniciar() throws SQLException {
         // Skin tipo WINDOWS
         try {
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");

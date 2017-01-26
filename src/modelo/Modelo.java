@@ -26,34 +26,6 @@ public class Modelo extends database {
     }
 
     /**
-     * Método para insertar un nuevo cliente en la base de datos
-     *
-     * @param telefono de tipo String
-     * @param nombre nombre del cliente
-     * @return devuelve true cuando se ha insertado con éxito y sino devuelve
-     * false
-     */
-    public boolean nuevoCliente(String nombre, String telefono) {
-        //Se valida los datos
-        if (validarCliente(nombre) == true && validarTelefono(telefono) == true) {
-            String q = " INSERT INTO cliente (Nombre, Telefono) "
-                    + "VALUES ('" + nombre + "', '" + telefono + "') ";
-            //se ejecuta la consulta
-            try {
-                PreparedStatement pstm = this.getConexion().prepareStatement(q);
-                pstm.execute();
-                pstm.close();
-                return true;
-            } catch (SQLException e) {
-                System.err.println(e.getMessage());
-            }
-            return false;
-        } else {
-            return false;
-        }
-    }
-
-    /**
      *
      * @param nombre nombre del cliente
      * @return devuelve si está o no relleno el campo del nombre del cliente
@@ -85,34 +57,6 @@ public class Modelo extends database {
     }
 
     /**
-     * Elimina un registro dado su ID - Llave primaria
-     *
-     * @param id la clave primaria que queramos eliminar
-     * @return devuelve un true si se ha eliminado satisfactoriamente o sino un
-     * false
-     */
-    public boolean eliminarCliente(String id) {
-        boolean res = false;
-        if (id.equals("") != true) {
-            //se arma la consulta
-            String q = " DELETE FROM cliente WHERE  idCliente='" + id + "' ";
-            //se ejecuta la consulta
-            try {
-                PreparedStatement pstm = this.getConexion().prepareStatement(q);
-                pstm.execute();
-                pstm.close();
-                res = true;
-            } catch (SQLException e) {
-                System.err.println(e.getMessage());
-            }
-        } else {
-            res = false;
-
-        }
-        return res;
-    }
-
-    /**
      * Obtiene registros de la tabla cliente y los devuelve en un
      * DefaultTableMode
      *
@@ -125,7 +69,7 @@ public class Modelo extends database {
 
         try {
             s = this.getConexion().createStatement();
-            rs = s.executeQuery("SELECT * FROM TABLA_PROYECTOS");
+            rs = s.executeQuery("SELECT P.CODIGOPR, P.NOMBRE, P.CIUDAD FROM TABLA_PROYECTOS P");
             ResultSetMetaData rsMd = rs.getMetaData();
             //La cantidad de columnas que tiene la consulta
             int cantidadColumnas = rsMd.getColumnCount();
@@ -149,7 +93,54 @@ public class Modelo extends database {
 
         return tablemodel;
     }
-    
+
+    public DefaultTableModel getTablaPiezas2() throws SQLException {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String[] columnas = {"Código Proyecto", "Nombre", "Ciudad"};
+        DefaultTableModel tabla = new DefaultTableModel();
+
+        int i = 0;
+        String selectSQL = "SELECT count(*) as c FROM TABLA_PROYECTOS";
+
+        ps = this.getConexion().prepareStatement(selectSQL);
+        rs = ps.executeQuery(selectSQL);
+        rs.next();
+        int filas = rs.getInt("c");
+        System.out.println(filas);
+        rs.close();
+        ps.close();
+        //LE FIJAMOS EL NUMERO DE FILAS OBTENIDAS
+        Object[][] datos = new String[filas][4];
+
+        //PROCEDEMOS A CONSTRUIR Y EJECUTAR LA CONSULTA QUE RELLENARA LA TABLA
+        selectSQL = "SELECT P.CODIGOPR, P.NOMBRE, P.CIUDAD FROM TABLA_PROYECTOS P";
+        System.out.println(selectSQL);
+        ps = this.getConexion().prepareStatement(selectSQL);
+        rs = ps.executeQuery(selectSQL);
+
+        while (rs.next()) {
+
+            datos[i][0] = rs.getString("CODIGOPR");
+            datos[i][1] = rs.getString("NOMBRE");
+            datos[i][2] = rs.getString("CIUDAD");
+
+            i++;
+
+        }
+
+        tabla.setDataVector(datos, columnas);
+        rs.close();
+        ps.close();
+        this.getConexion().close();
+        return tabla;
+    }
+
+    /**
+     * Carga de la tabla Piezas
+     *
+     * @return
+     */
     public DefaultTableModel getTablaPiezas() {
         DefaultTableModel tablemodel = new DefaultTableModel();
         Statement s;
@@ -174,7 +165,7 @@ public class Modelo extends database {
                 tablemodel.addRow(fila);
             }
             rs.close();
-           // this.getConexion().close();
+            // this.getConexion().close();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
@@ -184,8 +175,9 @@ public class Modelo extends database {
 
     /**
      * Método para obtener piezas relacionadas dada un codigo de proyecto
+     *
      * @param aux
-     * @return 
+     * @return
      */
     public DefaultTableModel getTablaPiezasRelacionadas(String aux) {
         DefaultTableModel tablemodel = new DefaultTableModel();
@@ -194,7 +186,7 @@ public class Modelo extends database {
 
         try {
             s = this.getConexion().createStatement();
-            rs = s.executeQuery("Select PI.CODIGOPI, PI.NOMBRE, PI.PRECIO, PI.DESCRIPCION, PI.CANTIDAD, PI.PROVEEDOR.CODIGOPO, PI.PROVEEDOR.NOMBRE From TABLA_PROYECTOS P, Table(P.PIEZASPROYECTO) PI WHERE PI.CODIGOPI='" + aux + "'");
+            rs = s.executeQuery("Select PI.CODIGOPI, PI.NOMBRE, PI.PRECIO, PI.DESCRIPCION, PI.CANTIDAD, PI.PROVEEDOR.CODIGOPO, PI.PROVEEDOR.NOMBRE From TABLA_PROYECTOS P, Table(P.PIEZASPROYECTO) PI WHERE P.CODIGOPR='" + aux + "'");
             ResultSetMetaData rsMd = rs.getMetaData();
             //La cantidad de columnas que tiene la consulta
             int cantidadColumnas = rsMd.getColumnCount();
@@ -211,39 +203,12 @@ public class Modelo extends database {
                 tablemodel.addRow(fila);
             }
             rs.close();
-           // this.getConexion().close();
+            // this.getConexion().close();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
 
         return tablemodel;
-    }
-
-    /**
-     * Método para modificar algún dato de la tabla cliente
-     *
-     * @param id es la id del cliente, esta no se modifica simplemente es para
-     * ejecutar la busqueda con la consulta
-     * @param nombre del cliente
-     * @param telefono del cliente
-     * @return devuelve true en caso de que se haya modificado correctamente y
-     * false en caso contrario.
-     */
-    public boolean modificarCliente(String id, String nombre, String telefono) {
-
-        String q = " UPDATE cliente SET Nombre = '" + nombre + "' , Telefono = '" + telefono + "' WHERE idCliente = '" + id + "' ;";
-
-        //se ejecuta la consulta
-        try {
-            PreparedStatement pstm = this.getConexion().prepareStatement(q);
-            pstm.execute();
-            pstm.close();
-            return true;
-        } catch (SQLException e) {
-            System.err.println(e.getMessage());
-        }
-        return false;
-
     }
 
     public boolean InsertaProyecto(String text, String text0, String text1) {
