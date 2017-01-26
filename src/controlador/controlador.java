@@ -168,8 +168,8 @@ public class controlador implements ActionListener, MouseListener {
             this.vistaHome.TxtCodigoPieza.setText("");
             this.vistaHome.TxtNombrePieza.setText("");
             this.vistaHome.TxtDescripcionPi.setText("");
-            this.vistaHome.SpinnerCantidadPi.setValue("0");
-            this.vistaHome.SpinnerPrecioPi.setValue("0");
+            this.vistaHome.SpinnerCantidadPi.setValue(0);
+            this.vistaHome.SpinnerPrecioPi.setValue(0);
             //precP = coger valor de spinner
             //cantP = coger calor de spinner
             this.vistaHome.TxtCodProveedor.setText("");
