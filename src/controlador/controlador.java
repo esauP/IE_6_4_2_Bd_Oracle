@@ -127,9 +127,11 @@ public class controlador implements ActionListener, MouseListener {
             apePr = this.vistaHome.TxtApellidosProveedor.getText();
             direcPr = this.vistaHome.TxtDirecProveedor.getText();
 
-//            if (mo.InsertaPieza(codP, nomP, descP, precP, cantP, codPr, nomPr, apePr, direcPr)) {
+//            if (mo.InsertaPieza(codP, nomP, precP, descP, cantP, codPr, nomPr, apePr, direcPr)) {
 //
 //            }
+
+
         }
         if (e.getSource() == this.vistaHome.BtnActualizaPieza) {
             String codP, nomP, precP, cantP, descP, codPr, nomPr, apePr, direcPr;
@@ -185,7 +187,7 @@ public class controlador implements ActionListener, MouseListener {
 
     public void mouseClicked(MouseEvent e) {
 
-        if (e.getButton() == 1)//boton izquierdo
+        if (e.getButton() == 1 && e.getSource() == this.vistaHome.TableProyectos)//boton izquierdo
         {
             int fila = this.vistaHome.TableProyectos.rowAtPoint(e.getPoint());
             if (fila > -1) {
@@ -193,6 +195,20 @@ public class controlador implements ActionListener, MouseListener {
                 this.vistaHome.TxtCodigoProy.setText(String.valueOf(this.vistaHome.TableProyectos.getValueAt(fila, 0)));
                 this.vistaHome.TxtNombreProy.setText(String.valueOf(this.vistaHome.TableProyectos.getValueAt(fila, 1)));
                 this.vistaHome.TxtCiudadProy.setText(String.valueOf(this.vistaHome.TableProyectos.getValueAt(fila, 2)));
+            }
+        } else if (e.getButton() == 1 && e.getSource() == this.vistaHome.TablePiezas) {
+            int fila = this.vistaHome.TablePiezas.rowAtPoint(e.getPoint());
+            if (fila > -1) {
+                this.vistaHome.TxtCodigoPieza.setText(String.valueOf(this.vistaHome.TablePiezas.getValueAt(fila, 0)));
+                this.vistaHome.TxtNombrePieza.setText(String.valueOf(this.vistaHome.TablePiezas.getValueAt(fila, 1)));
+                this.vistaHome.SpinnerPrecioPi.setValue(Double.parseDouble(String.valueOf(this.vistaHome.TablePiezas.getValueAt(fila, 2))));
+                this.vistaHome.TxtDescripcionPi.setText(String.valueOf(this.vistaHome.TablePiezas.getValueAt(fila, 3)));
+                this.vistaHome.SpinnerCantidadPi.setValue(Integer.parseInt(String.valueOf(this.vistaHome.TablePiezas.getValueAt(fila, 4))));
+                this.vistaHome.TxtCodProveedor.setText(String.valueOf(this.vistaHome.TablePiezas.getValueAt(fila, 5)));
+                this.vistaHome.TxtNombreProveedor.setText(String.valueOf(this.vistaHome.TablePiezas.getValueAt(fila, 6)));
+                this.vistaHome.TxtApellidosProveedor.setText(String.valueOf(this.vistaHome.TablePiezas.getValueAt(fila, 7)));
+                this.vistaHome.TxtDirecProveedor.setText(String.valueOf(this.vistaHome.TablePiezas.getValueAt(fila, 8)));
+
             }
         }
     }

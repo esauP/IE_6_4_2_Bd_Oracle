@@ -297,6 +297,10 @@
       </SubComponents>
     </Container>
     <Component class="javax.swing.JSpinner" name="SpinnerPrecioPi">
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="SpinnerNumberModel model3 = new SpinnerNumberModel(value3, min3, max3, step3);&#xd;&#xa;&#xd;&#xa;SpinnerPrecioPi.setModel(model3);"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="double value3 = 0.00;&#xd;&#xa;double min3 = 0.00;&#xd;&#xa;double max3 = 1000000;&#xd;&#xa;double step3 = 1.00;"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel18">
       <Properties>

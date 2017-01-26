@@ -6,6 +6,7 @@
 package vista;
 
 import java.awt.Toolkit;
+import javax.swing.SpinnerNumberModel;
 
 //y punto
 /**
@@ -51,7 +52,14 @@ public class home extends javax.swing.JFrame {
         jLabel17 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         TablePiezas = new javax.swing.JTable();
+        double value3 = 0.00;
+        double min3 = 0.00;
+        double max3 = 1000000;
+        double step3 = 1.00;
         SpinnerPrecioPi = new javax.swing.JSpinner();
+        SpinnerNumberModel model3 = new SpinnerNumberModel(value3, min3, max3, step3);
+
+        SpinnerPrecioPi.setModel(model3);
         jLabel18 = new javax.swing.JLabel();
         SpinnerCantidadPi = new javax.swing.JSpinner();
         jLabel19 = new javax.swing.JLabel();
