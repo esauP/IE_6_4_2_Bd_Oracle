@@ -300,12 +300,38 @@ public class Modelo extends database {
         }
     }
 
-    public boolean ActualizaPieza(String codP, String nomP, String descP, String precP, String cantP, String codPr, String nomPr, String apePr, String direcPr) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean ActualizaPieza(String codP, String nomP, String descP, double precP, double cantP, String codPr, String nomPr, String apePr, String direcPr, double codPro) {
+        Statement s;
+
+        try {
+            s = this.getConexion().createStatement();
+            //Llamada a la funcion
+            String sql = "Update Table(Select P.Piezasproyecto From Tabla_Proyectos P Where P.Codigopr='" + codPro + "') X"
+                    + "SET X.NOMBRE='" + nomP + "', X.PRECIO=" + precP + ", X.DESCRIPCION='" + descP + "', X.CANTIDAD=" + cantP + ", "
+                    + "X.PROVEEDOR.NOMBRE='" + nomPr + "', X.PROVEEDOR.APELLIDOS='" + apePr + "', X.PROVEEDOR.DIREC='" + direcPr + "' where X.CODIGOPI=CODIGOPI;";
+            //ejecuto la funcion
+            s.execute(sql);
+            return true;
+        } catch (SQLException e) {
+            return false;
+        }
     }
 
     public boolean BorrarPieza(String codP, String codProy) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            //Llamada a la funcion
+            String sql = "{call DELETE_PIEZA_PROYECTO (?,?) }";
+            CallableStatement cStmt = this.getConexion().prepareCall(sql);
+            //establezco los parámetros de entrada
+            cStmt.setString(1, codProy);
+            cStmt.setString(2, codP);
+            //ejecuto la funcion
+            cStmt.execute();
+            return true;
+        } catch (SQLException e) {
+            return false;
+        }
+
     }
 
 }
