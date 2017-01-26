@@ -130,9 +130,9 @@ public class controlador implements ActionListener, MouseListener {
             direcPr = this.vistaHome.TxtDirecProveedor.getText();
             this.refrescar();
 
-//            if (mo.InsertaPieza(codP, nomP, precP, descP, cantP, codPr, nomPr, apePr, direcPr)) {
-//
-//            }
+            if (mo.InsertaPieza(codP, nomP, precP, descP, cantP, codPr, nomPr, apePr, direcPr)) {
+
+            }
         }
         //ACTUALIZAR PIEZA
         if (e.getSource() == this.vistaHome.BtnActualizaPieza) {
@@ -150,9 +150,9 @@ public class controlador implements ActionListener, MouseListener {
             apePr = this.vistaHome.TxtApellidosProveedor.getText();
             direcPr = this.vistaHome.TxtDirecProveedor.getText();
 
-//            if (mo.ActualizaPieza(codP, nomP, descP, precP, cantP, codPr, nomPr, apePr, direcPr, codPro)) {
-//
-//            }
+            if (mo.ActualizaPieza(codP, nomP, descP, precP, cantP, codPr, nomPr, apePr, direcPr, codPro)) {
+
+            }
         }
         //DELETE PIEZAS
         if (e.getSource() == this.vistaHome.BtnBorraPieza) {

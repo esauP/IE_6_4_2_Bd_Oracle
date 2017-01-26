@@ -274,9 +274,8 @@ public class Modelo extends database {
      * @param apePr APELLIDOS PROVEEDOR
      * @param direcPr DIRECCION PROVEEDOR
      * @return BOOLEAN
-     * @throws SQLException
      */
-    public boolean InsertaPieza(String codP, String nomP, double precP, String descP, double cantP, String codPr, String nomPr, String apePr, String direcPr) throws SQLException {
+    public boolean InsertaPieza(String codP, String nomP, double precP, String descP, double cantP, String codPr, String nomPr, String apePr, String direcPr){
 
         try {
             //Llamada a la funcion
@@ -300,7 +299,7 @@ public class Modelo extends database {
         }
     }
 
-    public boolean ActualizaPieza(String codP, String nomP, String descP, double precP, double cantP, String codPr, String nomPr, String apePr, String direcPr, double codPro) {
+    public boolean ActualizaPieza(String codP, String nomP, String descP, double precP, double cantP, String codPr, String nomPr, String apePr, String direcPr, String codPro) {
         Statement s;
 
         try {
