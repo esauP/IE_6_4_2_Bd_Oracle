@@ -111,45 +111,50 @@ public class controlador implements ActionListener, MouseListener {
             this.vistaHome.TxtCodigoProy.setText("");
             this.vistaHome.TxtNombreProy.setText("");
             this.vistaHome.TxtCiudadProy.setText("");
+            this.refrescar();
         }
         /*----------------------------------------------------------------------------*/
         //Piezas
         if (e.getSource() == this.vistaHome.BtnAniadePieza) {
-            String codP, nomP, precP, cantP, descP, codPr, nomPr, apePr, direcPr;
+            String codP, nomP, descP, codPr, nomPr, apePr, direcPr;
+            double precP, cantP;
 
             codP = this.vistaHome.TxtCodigoPieza.getText();
             nomP = this.vistaHome.TxtNombrePieza.getText();
             descP = this.vistaHome.TxtDescripcionPi.getText();
-            //precP = coger valor de spinner
-            //cantP = coger calor de spinner
+            precP = Double.parseDouble(String.valueOf(this.vistaHome.SpinnerPrecioPi.getValue()));
+            cantP = Double.parseDouble(String.valueOf(this.vistaHome.SpinnerCantidadPi.getValue()));
             codPr = this.vistaHome.TxtCodProveedor.getText();
             nomPr = this.vistaHome.TxtNombreProveedor.getText();
             apePr = this.vistaHome.TxtApellidosProveedor.getText();
             direcPr = this.vistaHome.TxtDirecProveedor.getText();
+            this.refrescar();
 
 //            if (mo.InsertaPieza(codP, nomP, precP, descP, cantP, codPr, nomPr, apePr, direcPr)) {
 //
 //            }
-
-
         }
+        //ACTUALIZAR PIEZA
         if (e.getSource() == this.vistaHome.BtnActualizaPieza) {
-            String codP, nomP, precP, cantP, descP, codPr, nomPr, apePr, direcPr;
+            String codPro, codP, nomP, descP, codPr, nomPr, apePr, direcPr;
+            double precP, cantP;
 
+            codPro = this.vistaHome.TxtCodigoProy.getText();
             codP = this.vistaHome.TxtCodigoPieza.getText();
             nomP = this.vistaHome.TxtNombrePieza.getText();
             descP = this.vistaHome.TxtDescripcionPi.getText();
-            //precP = coger valor de spinner
-            //cantP = coger calor de spinner
+            precP = Double.parseDouble(String.valueOf(this.vistaHome.SpinnerPrecioPi.getValue()));
+            cantP = Double.parseDouble(String.valueOf(this.vistaHome.SpinnerCantidadPi.getValue()));
             codPr = this.vistaHome.TxtCodProveedor.getText();
             nomPr = this.vistaHome.TxtNombreProveedor.getText();
             apePr = this.vistaHome.TxtApellidosProveedor.getText();
             direcPr = this.vistaHome.TxtDirecProveedor.getText();
 
-//            if (mo.ActualizaPieza(codP, nomP, descP, precP, cantP, codPr, nomPr, apePr, direcPr)) {
+//            if (mo.ActualizaPieza(codP, nomP, descP, precP, cantP, codPr, nomPr, apePr, direcPr, codPro)) {
 //
 //            }
         }
+        //DELETE PIEZAS
         if (e.getSource() == this.vistaHome.BtnBorraPieza) {
             String codP, codProy;
 
