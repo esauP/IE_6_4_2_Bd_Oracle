@@ -78,30 +78,35 @@ public class controlador implements ActionListener, MouseListener {
 
         /*----------------------------------------------------------------------------*/
         //Proyectos
-        //ADD_PROJECT
+        //ADD_PROYECTO
         if (e.getSource() == this.vistaHome.BtnAniadeProyecto) {
 
             if (mo.InsertaProyecto(this.vistaHome.TxtCodigoProy.getText(), this.vistaHome.TxtNombreProy.getText(), this.vistaHome.TxtCiudadProy.getText()) == true) {
                 JOptionPane.showMessageDialog(this.vistaHome, "Exito: Proyecto añadido con éxito.");
-                this.vistaHome.TableProyectos.setModel(mo.getTablaProyectos());
-
+                this.refrescar();
             } else {
                 JOptionPane.showMessageDialog(this.vistaHome, "Error: algo salió mal");
             }
         }
-        //UPDATE_PROJECT
+        //UPDATE_PROYECTO
         if (e.getSource() == this.vistaHome.BtnActualizaProyecto) {
-            if (mo.ActualizaProyecto(this.vistaHome.TxtCodigoProy.getText(), this.vistaHome.TxtNombreProy.getText(), this.vistaHome.TxtCiudadProy.getText())) {
-                this.vistaHome.TableProyectos.setModel(mo.getTablaProyectos());
-
+            if (mo.ActualizaProyecto(this.vistaHome.TxtCodigoProy.getText(), this.vistaHome.TxtNombreProy.getText(), this.vistaHome.TxtCiudadProy.getText()) == true) {
+                JOptionPane.showMessageDialog(this.vistaHome, "Exito: Proyecto modificado con éxito.");
+                this.refrescar();
+            } else {
+                JOptionPane.showMessageDialog(this.vistaHome, "Error: algo salió mal");
             }
         }
+        //DELETE_PROYECTO
         if (e.getSource() == this.vistaHome.BtnBorraProyecto) {
-            if (mo.BorraProyecto(this.vistaHome.TxtCodigoProy.getText())) {
-                this.vistaHome.TableProyectos.setModel(mo.getTablaProyectos());
-
+            if (mo.BorraProyecto(this.vistaHome.TxtCodigoProy.getText()) == true) {
+                JOptionPane.showMessageDialog(this.vistaHome, "Exito: Proyecto borrado con éxito.");
+                this.refrescar();
+            } else {
+                JOptionPane.showMessageDialog(this.vistaHome, "Error: algo salió mal");
             }
         }
+        //LIMPIAR DATOS PROYECTOS
         if (e.getSource() == this.vistaHome.BtnLimpiarTxtProyecto) {
             this.vistaHome.TxtCodigoProy.setText("");
             this.vistaHome.TxtNombreProy.setText("");
@@ -123,7 +128,7 @@ public class controlador implements ActionListener, MouseListener {
             direcPr = this.vistaHome.TxtDirecProveedor.getText();
 
 //            if (mo.InsertaPieza(codP, nomP, descP, precP, cantP, codPr, nomPr, apePr, direcPr)) {
-//        this.vistaHome.TablePiezas.setModel(mo.getTablaPiezas());
+//
 //            }
         }
         if (e.getSource() == this.vistaHome.BtnActualizaPieza) {
@@ -140,7 +145,7 @@ public class controlador implements ActionListener, MouseListener {
             direcPr = this.vistaHome.TxtDirecProveedor.getText();
 
 //            if (mo.ActualizaPieza(codP, nomP, descP, precP, cantP, codPr, nomPr, apePr, direcPr)) {
-//        this.vistaHome.TablePiezas.setModel(mo.getTablaPiezas());
+//
 //            }
         }
         if (e.getSource() == this.vistaHome.BtnBorraPieza) {
@@ -149,7 +154,6 @@ public class controlador implements ActionListener, MouseListener {
             codP = this.vistaHome.TxtCodigoPieza.getText();
             codProy = this.vistaHome.TxtCodigoProy.getText();
             if (mo.BorrarPieza(codP, codProy)) {
-                this.vistaHome.TablePiezas.setModel(mo.getTablaPiezas());
 
             }
         }
@@ -186,7 +190,9 @@ public class controlador implements ActionListener, MouseListener {
             int fila = this.vistaHome.TableProyectos.rowAtPoint(e.getPoint());
             if (fila > -1) {
                 this.vistaHome.TablePiezas.setModel(mo.getTablaPiezasRelacionadas(String.valueOf(this.vistaHome.TableProyectos.getValueAt(fila, 0))));
-
+                this.vistaHome.TxtCodigoProy.setText(String.valueOf(this.vistaHome.TableProyectos.getValueAt(fila, 0)));
+                this.vistaHome.TxtNombreProy.setText(String.valueOf(this.vistaHome.TableProyectos.getValueAt(fila, 1)));
+                this.vistaHome.TxtCiudadProy.setText(String.valueOf(this.vistaHome.TableProyectos.getValueAt(fila, 2)));
             }
         }
     }
@@ -201,6 +207,11 @@ public class controlador implements ActionListener, MouseListener {
     }
 
     public void mouseExited(MouseEvent e) {
+    }
+
+    public void refrescar() {
+        this.vistaHome.TableProyectos.setModel(mo.getTablaProyectos());
+        this.vistaHome.TablePiezas.setModel(mo.getTablaPiezas());
     }
 
 }

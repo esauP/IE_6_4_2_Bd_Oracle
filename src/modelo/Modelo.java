@@ -223,7 +223,6 @@ public class Modelo extends database {
             cStmt.setString(3, text1);
             //ejecuto la funcion
             cStmt.execute();
-            this.getConexion().commit();
             return true;
         } catch (SQLException e) {
             return false;
@@ -231,15 +230,38 @@ public class Modelo extends database {
     }
 
     public boolean ActualizaProyecto(String text, String text0, String text1) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+          try {
+            //Llamada a la funcion
+            String sql = "{call UPDATE_PROYECTO (?,?,?) }";
+            CallableStatement cStmt = this.getConexion().prepareCall(sql);
+            //establezco los parámetros de entrada
+            cStmt.setString(1, text);
+            cStmt.setString(2, text0);
+            cStmt.setString(3, text1);
+            //ejecuto la funcion
+            cStmt.execute();
+            return true;
+        } catch (SQLException e) {
+            return false;
+        }
     }
 
     public boolean BorraProyecto(String text) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            //Llamada a la funcion
+            String sql = "{call DELETE_PROYECTO (?) }";
+            CallableStatement cStmt = this.getConexion().prepareCall(sql);
+            //establezco los parámetros de entrada
+            cStmt.setString(1, text);
+            //ejecuto la funcion
+            cStmt.execute();          
+            return true;
+        } catch (SQLException e) {
+            return false;
+        }
     }
 
     public boolean InsertaPieza(String codP, String nomP, String descP, String precP, String cantP, String codPr, String nomPr, String apePr, String direcPr) throws SQLException {
-
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -250,5 +272,6 @@ public class Modelo extends database {
     public boolean BorrarPieza(String codP, String codProy) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
 
 }
