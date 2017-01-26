@@ -218,12 +218,12 @@ public class Modelo extends database {
             String sql = "{ ? = call ADD_PROYECTO (?,?,?) }";
             CallableStatement cStmt = this.getConexion().prepareCall(sql);
             //establezco los parámetros de entrada
-            cStmt.setString(2, text);
-            cStmt.setString(3, text0);
-            cStmt.setString(4, text1);
+            cStmt.setString(1, text);
+            cStmt.setString(2, text0);
+            cStmt.setString(3, text1);
             //ejecuto la funcion
             cStmt.execute();
-            this.getConexion().commit();
+            this.getConexion().setAutoCommit(true);
             return true;
         } catch (SQLException e) {
             return false;

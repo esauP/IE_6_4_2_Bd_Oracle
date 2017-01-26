@@ -81,8 +81,10 @@ public class controlador implements ActionListener, MouseListener {
         //ADD_PROJECT
         if (e.getSource() == this.vistaHome.BtnAniadeProyecto) {
 
-            if (mo.InsertaProyecto(this.vistaHome.TxtCodigoProy.getText(), this.vistaHome.TxtNombreProy.getText(), this.vistaHome.TxtCiudadProy.getText())) {
-                
+            if (mo.InsertaProyecto(this.vistaHome.TxtCodigoProy.getText(), this.vistaHome.TxtNombreProy.getText(), this.vistaHome.TxtCiudadProy.getText())==true) {
+                JOptionPane.showMessageDialog(this.vistaHome, "Exito: Proyecto añadido con éxito.");
+            } else {
+                JOptionPane.showMessageDialog(this.vistaHome, "Error: algo salió mal");
             }
         }
         //UPDATE_PROJECT
