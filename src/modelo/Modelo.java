@@ -142,7 +142,7 @@ public class Modelo extends database {
                 tablemodel.addRow(fila);
             }
             rs.close();
-            this.getConexion().close();
+            //this.getConexion().close();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
