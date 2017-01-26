@@ -125,7 +125,7 @@ public class Modelo extends database {
 
         try {
             s = this.getConexion().createStatement();
-            rs = s.executeQuery("SELECT * FROM TABLA_PROYECTOS P");
+            rs = s.executeQuery("SELECT * FROM TABLA_PROYECTOS");
             ResultSetMetaData rsMd = rs.getMetaData();
             //La cantidad de columnas que tiene la consulta
             int cantidadColumnas = rsMd.getColumnCount();
@@ -149,7 +149,44 @@ public class Modelo extends database {
 
         return tablemodel;
     }
+    
+    public DefaultTableModel getTablaPiezas() {
+        DefaultTableModel tablemodel = new DefaultTableModel();
+        Statement s;
+        ResultSet rs = null;
 
+        try {
+            s = this.getConexion().createStatement();
+            rs = s.executeQuery("Select PI.CODIGOPI, PI.NOMBRE, PI.PRECIO, PI.DESCRIPCION, PI.CANTIDAD, PI.PROVEEDOR.CODIGOPO, PI.PROVEEDOR.NOMBRE From TABLA_PROYECTOS P, Table(P.PIEZASPROYECTO) PI");
+            ResultSetMetaData rsMd = rs.getMetaData();
+            //La cantidad de columnas que tiene la consulta
+            int cantidadColumnas = rsMd.getColumnCount();
+            //Establecer como cabezeras el nombre de las colimnas
+            for (int i = 1; i <= cantidadColumnas; i++) {
+                tablemodel.addColumn(rsMd.getColumnLabel(i));
+            }
+            //Creando las filas para el JTable
+            while (rs.next()) {
+                Object[] fila = new Object[cantidadColumnas];
+                for (int i = 0; i < cantidadColumnas; i++) {
+                    fila[i] = rs.getObject(i + 1);
+                }
+                tablemodel.addRow(fila);
+            }
+            rs.close();
+           // this.getConexion().close();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return tablemodel;
+    }
+
+    /**
+     * Método para obtener piezas relacionadas dada un codigo de proyecto
+     * @param aux
+     * @return 
+     */
     public DefaultTableModel getTablaPiezasRelacionadas(String aux) {
         DefaultTableModel tablemodel = new DefaultTableModel();
         Statement s;
@@ -174,7 +211,7 @@ public class Modelo extends database {
                 tablemodel.addRow(fila);
             }
             rs.close();
-            this.getConexion().close();
+           // this.getConexion().close();
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }

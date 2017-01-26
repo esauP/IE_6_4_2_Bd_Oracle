@@ -69,6 +69,7 @@ public class controlador implements ActionListener, MouseListener {
         this.vistaHome.TableProyectos.addMouseListener(this);
         this.vistaHome.TableProyectos.setModel(mo.getTablaProyectos());
         this.vistaHome.TablePiezas.addMouseListener(this);
+        this.vistaHome.TablePiezas.setModel(mo.getTablaPiezas());
     }
 
     //Control de eventos de los controles que tienen definido un "ActionCommand"
