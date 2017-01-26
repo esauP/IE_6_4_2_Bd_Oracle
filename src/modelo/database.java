@@ -26,7 +26,7 @@ public class database {
             //obtenemos el driver de para mysql
             Class.forName("oracle.jdbc.driver.OracleDriver");
             //obtenemos la conexión
-            conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","system","0045");
+            conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","system","root");
             conn.setAutoCommit(true);
             System.out.println("conectazo");
         } catch (SQLException e) {

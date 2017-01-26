@@ -81,8 +81,10 @@ public class controlador implements ActionListener, MouseListener {
         //ADD_PROJECT
         if (e.getSource() == this.vistaHome.BtnAniadeProyecto) {
 
-            if (mo.InsertaProyecto(this.vistaHome.TxtCodigoProy.getText(), this.vistaHome.TxtNombreProy.getText(), this.vistaHome.TxtCiudadProy.getText())==true) {
+            if (mo.InsertaProyecto(this.vistaHome.TxtCodigoProy.getText(), this.vistaHome.TxtNombreProy.getText(), this.vistaHome.TxtCiudadProy.getText()) == true) {
                 JOptionPane.showMessageDialog(this.vistaHome, "Exito: Proyecto añadido con éxito.");
+                this.vistaHome.TableProyectos.setModel(mo.getTablaProyectos());
+
             } else {
                 JOptionPane.showMessageDialog(this.vistaHome, "Error: algo salió mal");
             }
@@ -90,11 +92,13 @@ public class controlador implements ActionListener, MouseListener {
         //UPDATE_PROJECT
         if (e.getSource() == this.vistaHome.BtnActualizaProyecto) {
             if (mo.ActualizaProyecto(this.vistaHome.TxtCodigoProy.getText(), this.vistaHome.TxtNombreProy.getText(), this.vistaHome.TxtCiudadProy.getText())) {
+                this.vistaHome.TableProyectos.setModel(mo.getTablaProyectos());
 
             }
         }
         if (e.getSource() == this.vistaHome.BtnBorraProyecto) {
             if (mo.BorraProyecto(this.vistaHome.TxtCodigoProy.getText())) {
+                this.vistaHome.TableProyectos.setModel(mo.getTablaProyectos());
 
             }
         }
@@ -119,7 +123,7 @@ public class controlador implements ActionListener, MouseListener {
             direcPr = this.vistaHome.TxtDirecProveedor.getText();
 
 //            if (mo.InsertaPieza(codP, nomP, descP, precP, cantP, codPr, nomPr, apePr, direcPr)) {
-//
+//        this.vistaHome.TablePiezas.setModel(mo.getTablaPiezas());
 //            }
         }
         if (e.getSource() == this.vistaHome.BtnActualizaPieza) {
@@ -136,7 +140,7 @@ public class controlador implements ActionListener, MouseListener {
             direcPr = this.vistaHome.TxtDirecProveedor.getText();
 
 //            if (mo.ActualizaPieza(codP, nomP, descP, precP, cantP, codPr, nomPr, apePr, direcPr)) {
-//
+//        this.vistaHome.TablePiezas.setModel(mo.getTablaPiezas());
 //            }
         }
         if (e.getSource() == this.vistaHome.BtnBorraPieza) {
@@ -145,6 +149,7 @@ public class controlador implements ActionListener, MouseListener {
             codP = this.vistaHome.TxtCodigoPieza.getText();
             codProy = this.vistaHome.TxtCodigoProy.getText();
             if (mo.BorrarPieza(codP, codProy)) {
+                this.vistaHome.TablePiezas.setModel(mo.getTablaPiezas());
 
             }
         }
@@ -175,13 +180,13 @@ public class controlador implements ActionListener, MouseListener {
     }
 
     public void mouseClicked(MouseEvent e) {
-        
+
         if (e.getButton() == 1)//boton izquierdo
         {
             int fila = this.vistaHome.TableProyectos.rowAtPoint(e.getPoint());
             if (fila > -1) {
                 this.vistaHome.TablePiezas.setModel(mo.getTablaPiezasRelacionadas(String.valueOf(this.vistaHome.TableProyectos.getValueAt(fila, 0))));
-                
+
             }
         }
     }
