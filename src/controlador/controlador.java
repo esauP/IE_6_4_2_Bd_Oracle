@@ -112,9 +112,9 @@ public class controlador implements ActionListener, MouseListener {
             apePr = this.vistaHome.TxtApellidosProveedor.getText();
             direcPr = this.vistaHome.TxtDirecProveedor.getText();
 
-            if (mo.InsertaPieza(codP, nomP, descP, precP, cantP, codPr, nomPr, apePr, direcPr)) {
-
-            }
+//            if (mo.InsertaPieza(codP, nomP, descP, precP, cantP, codPr, nomPr, apePr, direcPr)) {
+//
+//            }
         }
         if (e.getSource() == this.vistaHome.BtnActualizaPieza) {
             String codP, nomP, precP, cantP, descP, codPr, nomPr, apePr, direcPr;
@@ -129,9 +129,9 @@ public class controlador implements ActionListener, MouseListener {
             apePr = this.vistaHome.TxtApellidosProveedor.getText();
             direcPr = this.vistaHome.TxtDirecProveedor.getText();
 
-            if (mo.ActualizaPieza(codP, nomP, descP, precP, cantP, codPr, nomPr, apePr, direcPr)) {
-
-            }
+//            if (mo.ActualizaPieza(codP, nomP, descP, precP, cantP, codPr, nomPr, apePr, direcPr)) {
+//
+//            }
         }
         if (e.getSource() == this.vistaHome.BtnBorraPieza) {
             String codP, codProy;
@@ -169,6 +169,15 @@ public class controlador implements ActionListener, MouseListener {
     }
 
     public void mouseClicked(MouseEvent e) {
+        
+        if (e.getButton() == 1)//boton izquierdo
+        {
+            int fila = this.vistaHome.TableProyectos.rowAtPoint(e.getPoint());
+            if (fila > -1) {
+                this.vistaHome.TablePiezas.setModel(mo.getTablaPiezasRelacionadas(String.valueOf(this.vistaHome.TableProyectos.getValueAt(fila, 0))));
+                
+            }
+        }
     }
 
     public void mousePressed(MouseEvent e) {

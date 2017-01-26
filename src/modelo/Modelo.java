@@ -150,6 +150,38 @@ public class Modelo extends database {
         return tablemodel;
     }
 
+    public DefaultTableModel getTablaPiezasRelacionadas(String aux) {
+        DefaultTableModel tablemodel = new DefaultTableModel();
+        Statement s;
+        ResultSet rs = null;
+
+        try {
+            s = this.getConexion().createStatement();
+            rs = s.executeQuery("Select PI.CODIGOPI, PI.NOMBRE, PI.PRECIO, PI.DESCRIPCION, PI.CANTIDAD, PI.PROVEEDOR.CODIGOPO, PI.PROVEEDOR.NOMBRE From TABLA_PROYECTOS P, Table(P.PIEZASPROYECTO) PI WHERE PI.CODIGOPI='" + aux + "'");
+            ResultSetMetaData rsMd = rs.getMetaData();
+            //La cantidad de columnas que tiene la consulta
+            int cantidadColumnas = rsMd.getColumnCount();
+            //Establecer como cabezeras el nombre de las colimnas
+            for (int i = 1; i <= cantidadColumnas; i++) {
+                tablemodel.addColumn(rsMd.getColumnLabel(i));
+            }
+            //Creando las filas para el JTable
+            while (rs.next()) {
+                Object[] fila = new Object[cantidadColumnas];
+                for (int i = 0; i < cantidadColumnas; i++) {
+                    fila[i] = rs.getObject(i + 1);
+                }
+                tablemodel.addRow(fila);
+            }
+            rs.close();
+            this.getConexion().close();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        return tablemodel;
+    }
+
     /**
      * Método para modificar algún dato de la tabla cliente
      *
