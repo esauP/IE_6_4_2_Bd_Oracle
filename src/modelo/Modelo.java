@@ -187,7 +187,7 @@ public class Modelo extends database {
 
         try {
             s = this.getConexion().createStatement();
-            rs = s.executeQuery("Select PI.CODIGOPI, PI.NOMBRE, PI.PRECIO, PI.DESCRIPCION, PI.CANTIDAD, PI.PROVEEDOR.CODIGOPO, PI.PROVEEDOR.NOMBRE From TABLA_PROYECTOS P, Table(P.PIEZASPROYECTO) PI WHERE P.CODIGOPR='" + aux + "'");
+            rs = s.executeQuery("Select PI.CODIGOPI, PI.NOMBRE, PI.PRECIO, PI.DESCRIPCION, PI.CANTIDAD, PI.PROVEEDOR.CODIGOPO, PI.PROVEEDOR.NOMBRE, PI.PROVEEDOR.APELLIDOS, PI.PROVEEDOR.DIREC From TABLA_PROYECTOS P, Table(P.PIEZASPROYECTO) PI WHERE P.CODIGOPR='" + aux + "'");
             ResultSetMetaData rsMd = rs.getMetaData();
             //La cantidad de columnas que tiene la consulta
             int cantidadColumnas = rsMd.getColumnCount();
