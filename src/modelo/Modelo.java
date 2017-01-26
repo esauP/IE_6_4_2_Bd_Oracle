@@ -215,7 +215,7 @@ public class Modelo extends database {
     public boolean InsertaProyecto(String text, String text0, String text1) {
         try {
             //Llamada a la funcion
-            String sql = "{ ? = call ADD_PROYECTO (?,?,?) }";
+            String sql = "{call ADD_PROYECTO (?,?,?) }";
             CallableStatement cStmt = this.getConexion().prepareCall(sql);
             //establezco los parámetros de entrada
             cStmt.setString(1, text);
@@ -223,7 +223,7 @@ public class Modelo extends database {
             cStmt.setString(3, text1);
             //ejecuto la funcion
             cStmt.execute();
-            this.getConexion().setAutoCommit(true);
+            this.getConexion().commit();
             return true;
         } catch (SQLException e) {
             return false;
