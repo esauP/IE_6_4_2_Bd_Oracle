@@ -149,7 +149,7 @@ public class Modelo extends database {
 
         try {
             s = this.getConexion().createStatement();
-            rs = s.executeQuery("Select PI.CODIGOPI, PI.NOMBRE, PI.PRECIO, PI.DESCRIPCION, PI.CANTIDAD, PI.PROVEEDOR.CODIGOPO, PI.PROVEEDOR.NOMBRE From TABLA_PROYECTOS P, Table(P.PIEZASPROYECTO) PI");
+            rs = s.executeQuery("Select PI.CODIGOPI, PI.NOMBRE, PI.PRECIO, PI.DESCRIPCION, PI.CANTIDAD, PI.PROVEEDOR.CODIGOPO, PI.PROVEEDOR.NOMBRE, PI.PROVEEDOR.APELLIDOS, PI.PROVEEDOR.DIREC From TABLA_PROYECTOS P, Table(P.PIEZASPROYECTO) PI");
             ResultSetMetaData rsMd = rs.getMetaData();
             //La cantidad de columnas que tiene la consulta
             int cantidadColumnas = rsMd.getColumnCount();
@@ -230,7 +230,7 @@ public class Modelo extends database {
     }
 
     public boolean ActualizaProyecto(String text, String text0, String text1) {
-          try {
+        try {
             //Llamada a la funcion
             String sql = "{call UPDATE_PROYECTO (?,?,?) }";
             CallableStatement cStmt = this.getConexion().prepareCall(sql);
@@ -254,15 +254,50 @@ public class Modelo extends database {
             //establezco los parámetros de entrada
             cStmt.setString(1, text);
             //ejecuto la funcion
-            cStmt.execute();          
+            cStmt.execute();
             return true;
         } catch (SQLException e) {
             return false;
         }
     }
 
-    public boolean InsertaPieza(String codP, String nomP, String descP, String precP, String cantP, String codPr, String nomPr, String apePr, String direcPr) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    /**
+     * METODO QUE USAMOS PARA INSERTAR UNA NUEVA PIEZA
+     *
+     * @param codP CODIGO PIEZA
+     * @param nomP NOMBRE PIEZA
+     * @param precP PRECIO PIEZA
+     * @param descP DESCRIPCION PIEZA
+     * @param cantP CANTIDAD PIEZA
+     * @param codPr CODIGO PROVEEDOR
+     * @param nomPr NOMBRE PROVEEDOR
+     * @param apePr APELLIDOS PROVEEDOR
+     * @param direcPr DIRECCION PROVEEDOR
+     * @return BOOLEAN
+     * @throws SQLException
+     */
+    public boolean InsertaPieza(String codP, String nomP, double precP, String descP, double cantP, String codPr, String nomPr, String apePr, String direcPr) throws SQLException {
+
+        try {
+            //Llamada a la funcion
+            String sql = "{call ADD_PIEZA (?,?,?,?,?,?,?,?,?) }";
+            CallableStatement cStmt = this.getConexion().prepareCall(sql);
+            //establezco los parámetros de entrada
+            cStmt.setString(1, codP);
+            cStmt.setString(2, nomP);
+            cStmt.setDouble(3, precP);
+            cStmt.setString(4, descP);
+            cStmt.setDouble(5, cantP);
+            cStmt.setString(6, codPr);
+            cStmt.setString(7, nomPr);
+            cStmt.setString(8, apePr);
+            cStmt.setString(9, direcPr);
+            //ejecuto la funcion
+            cStmt.execute();
+            return true;
+        } catch (SQLException e) {
+            return false;
+        }
     }
 
     public boolean ActualizaPieza(String codP, String nomP, String descP, String precP, String cantP, String codPr, String nomPr, String apePr, String direcPr) {
@@ -272,6 +307,5 @@ public class Modelo extends database {
     public boolean BorrarPieza(String codP, String codProy) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
 
 }
