@@ -1,5 +1,6 @@
 package modelo;
 
+import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -212,7 +213,21 @@ public class Modelo extends database {
     }
 
     public boolean InsertaProyecto(String text, String text0, String text1) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            //Llamada a la funcion
+            String sql = "{ ? = call ADD_PROYECTO (?,?,?) }";
+            CallableStatement cStmt = this.getConexion().prepareCall(sql);
+            //establezco los parámetros de entrada
+            cStmt.setString(2, text);
+            cStmt.setString(3, text0);
+            cStmt.setString(4, text1);
+            //ejecuto la funcion
+            cStmt.execute();
+            this.getConexion().commit();
+            return true;
+        } catch (SQLException e) {
+            return false;
+        }
     }
 
     public boolean ActualizaProyecto(String text, String text0, String text1) {
@@ -223,7 +238,8 @@ public class Modelo extends database {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public boolean InsertaPieza(String codP, String nomP, String descP, String precP, String cantP, String codPr, String nomPr, String apePr, String direcPr) {
+    public boolean InsertaPieza(String codP, String nomP, String descP, String precP, String cantP, String codPr, String nomPr, String apePr, String direcPr) throws SQLException {
+
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

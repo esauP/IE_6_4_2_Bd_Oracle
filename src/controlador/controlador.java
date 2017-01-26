@@ -78,12 +78,14 @@ public class controlador implements ActionListener, MouseListener {
 
         /*----------------------------------------------------------------------------*/
         //Proyectos
+        //ADD_PROJECT
         if (e.getSource() == this.vistaHome.BtnAniadeProyecto) {
 
             if (mo.InsertaProyecto(this.vistaHome.TxtCodigoProy.getText(), this.vistaHome.TxtNombreProy.getText(), this.vistaHome.TxtCiudadProy.getText())) {
-
+                
             }
         }
+        //UPDATE_PROJECT
         if (e.getSource() == this.vistaHome.BtnActualizaProyecto) {
             if (mo.ActualizaProyecto(this.vistaHome.TxtCodigoProy.getText(), this.vistaHome.TxtNombreProy.getText(), this.vistaHome.TxtCiudadProy.getText())) {
 
