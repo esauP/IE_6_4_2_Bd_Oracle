@@ -116,7 +116,7 @@ public class controlador implements ActionListener, MouseListener {
         /*----------------------------------------------------------------------------*/
         //Piezas
         if (e.getSource() == this.vistaHome.BtnAniadePieza) {
-            String codP, nomP, descP, codPr, nomPr, apePr, direcPr;
+            String codP, nomP, descP, codPr, nomPr, apePr, direcPr, codProy;
             double precP, cantP;
 
             codP = this.vistaHome.TxtCodigoPieza.getText();
@@ -131,7 +131,10 @@ public class controlador implements ActionListener, MouseListener {
             this.refrescar();
 
             if (mo.InsertaPieza(codP, nomP, precP, descP, cantP, codPr, nomPr, apePr, direcPr)) {
-
+                JOptionPane.showMessageDialog(this.vistaHome, "Exito: Pieza añadida con éxito.");
+                this.refrescar();
+            } else {
+                JOptionPane.showMessageDialog(this.vistaHome, "Error: algo salió mal");
             }
         }
         //ACTUALIZAR PIEZA
@@ -151,7 +154,10 @@ public class controlador implements ActionListener, MouseListener {
             direcPr = this.vistaHome.TxtDirecProveedor.getText();
 
             if (mo.ActualizaPieza(codP, nomP, descP, precP, cantP, codPr, nomPr, apePr, direcPr, codPro)) {
-
+                JOptionPane.showMessageDialog(this.vistaHome, "Exito: Pieza actualizada con éxito.");
+                this.refrescar();
+            } else {
+                JOptionPane.showMessageDialog(this.vistaHome, "Error: algo salió mal");
             }
         }
         //DELETE PIEZAS
@@ -161,7 +167,10 @@ public class controlador implements ActionListener, MouseListener {
             codP = this.vistaHome.TxtCodigoPieza.getText();
             codProy = this.vistaHome.TxtCodigoProy.getText();
             if (mo.BorrarPieza(codP, codProy)) {
-
+                JOptionPane.showMessageDialog(this.vistaHome, "Exito: Pieza borrada con éxito.");
+                this.refrescar();
+            } else {
+                JOptionPane.showMessageDialog(this.vistaHome, "Error: algo salió mal");
             }
         }
         if (e.getSource() == this.vistaHome.BtnLimpiaTxtPieza) {
@@ -170,8 +179,6 @@ public class controlador implements ActionListener, MouseListener {
             this.vistaHome.TxtDescripcionPi.setText("");
             this.vistaHome.SpinnerCantidadPi.setValue(0);
             this.vistaHome.SpinnerPrecioPi.setValue(0);
-            //precP = coger valor de spinner
-            //cantP = coger calor de spinner
             this.vistaHome.TxtCodProveedor.setText("");
             this.vistaHome.TxtNombreProveedor.setText("");
             this.vistaHome.TxtApellidosProveedor.setText("");

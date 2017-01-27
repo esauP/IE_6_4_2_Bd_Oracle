@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Arrays;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -275,7 +276,7 @@ public class Modelo extends database {
      * @param direcPr DIRECCION PROVEEDOR
      * @return BOOLEAN
      */
-    public boolean InsertaPieza(String codP, String nomP, double precP, String descP, double cantP, String codPr, String nomPr, String apePr, String direcPr){
+    public boolean InsertaPieza(String codP, String nomP, double precP, String descP, double cantP, String codPr, String nomPr, String apePr, String direcPr) {
 
         try {
             //Llamada a la funcion
@@ -291,6 +292,30 @@ public class Modelo extends database {
             cStmt.setString(7, nomPr);
             cStmt.setString(8, apePr);
             cStmt.setString(9, direcPr);
+            //ejecuto la funcion
+            cStmt.execute();
+            return true;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+
+    /**
+     * METODO PARA INSERTAR UNA PIEZA EN UN PROYECTO
+     *
+     * @param codPi CODIGO PIEZA
+     * @param codProy   CODIGO PROYECTO
+     * @return BOOLEAN
+     */
+    public boolean InsertaPiezaProyecto(String codPi, String codProy) {
+        try {
+            //Llamada a la funcion
+            String sql = "{call ADD_PIEZA_PROYECTO (?,?) }";
+            CallableStatement cStmt = this.getConexion().prepareCall(sql);
+            //establezco los parámetros de entrada
+            cStmt.setString(1, codPi);
+            cStmt.setString(2, codProy);
             //ejecuto la funcion
             cStmt.execute();
             return true;
