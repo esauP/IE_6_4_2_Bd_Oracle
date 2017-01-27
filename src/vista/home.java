@@ -21,7 +21,7 @@ public class home extends javax.swing.JFrame {
         initComponents();
         int x = (int) (Toolkit.getDefaultToolkit().getScreenSize().getWidth() / 2 - this.getWidth() / 2);
         int y = (int) (Toolkit.getDefaultToolkit().getScreenSize().getHeight() / 2 - this.getHeight() / 2);
-        this.setLocation(x, y); //y punto
+        this.setLocation(x, y);
     }
 
     /**
@@ -79,7 +79,6 @@ public class home extends javax.swing.JFrame {
         BtnActualizaPieza = new javax.swing.JButton();
         BtnLimpiaTxtPieza = new javax.swing.JButton();
         BtnCargarPiezasDelProyecto = new javax.swing.JButton();
-        BtnAniadePiezaAProyec = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         btnSalir = new javax.swing.JMenuItem();
@@ -90,12 +89,17 @@ public class home extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(204, 204, 204));
+        setMaximumSize(new java.awt.Dimension(852, 661));
+        setMinimumSize(new java.awt.Dimension(852, 661));
+        setResizable(false);
 
         jLabel12.setText("Código Proyecto:");
 
         jLabel13.setText("Nombre:");
 
         jLabel15.setText("Ciudad:");
+
+        TxtCodigoProy.setBackground(new java.awt.Color(255, 102, 102));
 
         TableProyectos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -158,9 +162,6 @@ public class home extends javax.swing.JFrame {
         BtnLimpiaTxtPieza.setText("Limpiar");
 
         BtnCargarPiezasDelProyecto.setText("Cargar piezas");
-
-        BtnAniadePiezaAProyec.setText("Añadir Pieza a Proyecto");
-        BtnAniadePiezaAProyec.setToolTipText("Debe clickar en un proyecto y en una pieza.");
 
         jMenu1.setText("Menu");
 
@@ -251,10 +252,9 @@ public class home extends javax.swing.JFrame {
                             .addComponent(BtnActualizaPieza, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(18, 18, 18)
                             .addComponent(BtnLimpiaTxtPieza, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(BtnAniadePiezaAProyec))
+                            .addGap(165, 165, 165))
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 810, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -309,8 +309,7 @@ public class home extends javax.swing.JFrame {
                     .addComponent(BtnAniadePieza)
                     .addComponent(BtnBorraPieza)
                     .addComponent(BtnActualizaPieza)
-                    .addComponent(BtnLimpiaTxtPieza)
-                    .addComponent(BtnAniadePiezaAProyec))
+                    .addComponent(BtnLimpiaTxtPieza))
                 .addGap(17, 17, 17))
         );
 
@@ -356,7 +355,6 @@ public class home extends javax.swing.JFrame {
     public javax.swing.JButton BtnActualizaPieza;
     public javax.swing.JButton BtnActualizaProyecto;
     public javax.swing.JButton BtnAniadePieza;
-    public javax.swing.JButton BtnAniadePiezaAProyec;
     public javax.swing.JButton BtnAniadeProyecto;
     public javax.swing.JButton BtnBorraPieza;
     public javax.swing.JButton BtnBorraProyecto;

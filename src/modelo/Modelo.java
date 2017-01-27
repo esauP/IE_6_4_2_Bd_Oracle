@@ -363,19 +363,66 @@ public class Modelo extends database {
      * @param codPro CODIGO PROYECTO
      * @return BOOLEAN
      */
-    public boolean ActualizaPieza(String codP, String nomP, String descP, double precP, double cantP, String codPr, String nomPr, String apePr, String direcPr, String codPro) {
+    public boolean ActualizarPiezaProyecto(String codPro, String nomP, double precP, String descP, double cantP, String nomPr, String apePr, String direcPr, String codP) {
         Statement s;
 
         try {
-            s = this.getConexion().createStatement();
             //Llamada a la funcion
-            String sql = "Update Table(Select P.Piezasproyecto From Tabla_Proyectos P Where P.Codigopr='" + codPro + "') X"
-                    + "SET X.NOMBRE='" + nomP + "', X.PRECIO=" + precP + ", X.DESCRIPCION='" + descP + "', X.CANTIDAD=" + cantP + ", "
-                    + "X.PROVEEDOR.NOMBRE='" + nomPr + "', X.PROVEEDOR.APELLIDOS='" + apePr + "', X.PROVEEDOR.DIREC='" + direcPr + "' where X.CODIGOPI=CODIGOPI;";
+            String sql = "{call UPDATE_PIEZA_PROYECTO (?,?,?,?,?,?,?,?,?) }";
+            CallableStatement cStmt = this.getConexion().prepareCall(sql);
+            //establezco los parámetros de entrada
+            cStmt.setString(1, codPro);
+            cStmt.setString(2, nomP);
+            cStmt.setDouble(3, precP);
+            cStmt.setString(4, descP);
+            cStmt.setDouble(5, cantP);
+            cStmt.setString(6, nomPr);
+            cStmt.setString(7, apePr);
+            cStmt.setString(8, direcPr);
+            cStmt.setString(9, codP);
             //ejecuto la funcion
-            s.execute(sql);
+            cStmt.execute();
             return true;
         } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+
+    /**
+     * Método para actualizar un registro de la tabla TABLADEPIEZA
+     *
+     * @param codpieza Cód. de la pieza
+     * @param nomPieza nombre de la pieza
+     * @param precioPieza precio de la pieza en double
+     * @param descriPieza descripción de la pieza
+     * @param cantdPieza cantidad de piezas tipo double
+     * @param nombreProvee nombre del proveedor
+     * @param apellProvee apellidos del proveedor
+     * @param direcProveedor dirección del proveedor
+     * @return boolean en función de si la operación se realizó con o sin
+     * errores.
+     */
+    public boolean ActualizaPieza(String codpieza, String nomPieza, double precioPieza, String descriPieza, double cantdPieza, String nombreProvee, String apellProvee, String direcProveedor) {
+        try {
+            //Llamada a la funcion
+            String sql = "{call UPDATE_PIEZA (?,?,?,?,?,?,?,?) }";
+            CallableStatement cStmt = this.getConexion().prepareCall(sql);
+            //establezco los parámetros de entrada
+            cStmt.setString(1, codpieza);
+            cStmt.setString(2, nomPieza);
+            cStmt.setDouble(3, precioPieza);
+            cStmt.setString(4, descriPieza);
+            cStmt.setDouble(5, cantdPieza);
+            cStmt.setString(6, nombreProvee);
+            cStmt.setString(7, apellProvee);
+            cStmt.setString(8, direcProveedor);
+            //ejecuto la funcion
+            cStmt.execute();
+            this.getConexion().commit();
+            return true;
+        } catch (SQLException e) {
+            e.getMessage();
             return false;
         }
     }
@@ -387,7 +434,7 @@ public class Modelo extends database {
      * @param codProy CODIGO DE PROYECTO
      * @return BOOLEAN
      */
-    public boolean BorrarPieza(String codP, String codProy) {
+    public boolean BorrarPiezaProyecto(String codP, String codProy) {
         try {
             //Llamada a la funcion
             String sql = "{call DELETE_PIEZA_PROYECTO (?,?) }";
@@ -401,7 +448,21 @@ public class Modelo extends database {
         } catch (SQLException e) {
             return false;
         }
+    }
 
+    public boolean BorrarPieza(String codPieza) {
+        try {
+            //Llamada a la funcion
+            String sql = "{call DELETE_PIEZA (?) }";
+            CallableStatement cStmt = this.getConexion().prepareCall(sql);
+            //establezco los parámetros de entrada
+            cStmt.setString(1, codPieza);
+            //ejecuto la funcion
+            cStmt.execute();
+            return true;
+        } catch (SQLException e) {
+            return false;
+        }
     }
 
 }

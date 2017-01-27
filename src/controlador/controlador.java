@@ -62,7 +62,6 @@ public class controlador implements ActionListener, MouseListener {
         this.vistaHome.BtnBorraPieza.addActionListener(this);
         this.vistaHome.BtnLimpiaTxtPieza.addActionListener(this);
         this.vistaHome.BtnCargarPiezasDelProyecto.addActionListener(this);
-        this.vistaHome.BtnAniadePiezaAProyec.addActionListener(this);
 
         this.vistaHome.btnSalir.addActionListener(this);
 
@@ -122,7 +121,7 @@ public class controlador implements ActionListener, MouseListener {
         if (e.getSource() == this.vistaHome.BtnAniadePieza) {
             String codP, nomP, descP, codPr, nomPr, apePr, direcPr, codProy;
             double precP, cantP;
-
+            codProy = this.vistaHome.TxtCodigoProy.getText();
             codP = this.vistaHome.TxtCodigoPieza.getText();
             nomP = this.vistaHome.TxtNombrePieza.getText();
             descP = this.vistaHome.TxtDescripcionPi.getText();
@@ -132,50 +131,83 @@ public class controlador implements ActionListener, MouseListener {
             nomPr = this.vistaHome.TxtNombreProveedor.getText();
             apePr = this.vistaHome.TxtApellidosProveedor.getText();
             direcPr = this.vistaHome.TxtDirecProveedor.getText();
-            this.refrescar();
 
-            if (mo.InsertaPieza(codP, nomP, precP, descP, cantP, codPr, nomPr, apePr, direcPr)) {
-                JOptionPane.showMessageDialog(this.vistaHome, "Exito: Pieza añadida con éxito.");
-                this.refrescar();
-            } else {
-                JOptionPane.showMessageDialog(this.vistaHome, "Error: algo salió mal");
+            if (this.vistaHome.TxtCodigoProy.getText().equals("")) {
+                if (mo.InsertaPieza(codP, nomP, precP, descP, cantP, codPr, nomPr, apePr, direcPr)) {
+                    JOptionPane.showMessageDialog(this.vistaHome, "Exito: Pieza añadida con éxito.");
+                    this.refrescar();
+                } else {
+                    JOptionPane.showMessageDialog(this.vistaHome, "Error: algo salió mal");
+                }
+
+            } else if (!this.vistaHome.TxtCodigoProy.getText().equals("")) {
+
+                if (mo.InsertaPiezaProyecto(codP, codProy) == true) {
+                    JOptionPane.showMessageDialog(this.vistaHome, "Exito: Pieza del proyeto: " + codProy + "añadida con éxito.");
+                    this.vistaHome.TablePiezas.setModel(mo.getTablaPiezasRelacionadas(this.vistaHome.TxtCodigoProy.getText()));
+                } else {
+                    JOptionPane.showMessageDialog(this.vistaHome, "Error: algo salió mal");
+                }
             }
+
         }
-        //ACTUALIZAR PIEZA
+        //ACTUALIZAR PIEZA de TABLADEPIEZAS DE LA TABLA_PIEZAS DE PROYECTOS
         if (e.getSource() == this.vistaHome.BtnActualizaPieza) {
-            String codPro, codP, nomP, descP, codPr, nomPr, apePr, direcPr;
+            String codProy, codP, nomP, descP, codPr, nomPr, apePr, direcPr;
             double precP, cantP;
-
-            codPro = this.vistaHome.TxtCodigoProy.getText();
+            codProy = this.vistaHome.TxtCodigoProy.getText();
             codP = this.vistaHome.TxtCodigoPieza.getText();
             nomP = this.vistaHome.TxtNombrePieza.getText();
             descP = this.vistaHome.TxtDescripcionPi.getText();
             precP = Double.parseDouble(String.valueOf(this.vistaHome.SpinnerPrecioPi.getValue()));
             cantP = Double.parseDouble(String.valueOf(this.vistaHome.SpinnerCantidadPi.getValue()));
-            codPr = this.vistaHome.TxtCodProveedor.getText();
             nomPr = this.vistaHome.TxtNombreProveedor.getText();
             apePr = this.vistaHome.TxtApellidosProveedor.getText();
             direcPr = this.vistaHome.TxtDirecProveedor.getText();
 
-            if (mo.ActualizaPieza(codP, nomP, descP, precP, cantP, codPr, nomPr, apePr, direcPr, codPro)) {
-                JOptionPane.showMessageDialog(this.vistaHome, "Exito: Pieza actualizada con éxito.");
-                this.refrescar();
-            } else {
-                JOptionPane.showMessageDialog(this.vistaHome, "Error: algo salió mal");
+            if (this.vistaHome.TxtCodigoProy.getText().equals("")) {
+
+                if (mo.ActualizaPieza(codP, nomP, precP, descP, cantP, nomPr, apePr, direcPr) == true) {
+                    JOptionPane.showMessageDialog(this.vistaHome, "Exito: Pieza actualizada con éxito.");
+                    this.refrescar();
+                } else {
+                    JOptionPane.showMessageDialog(this.vistaHome, "Error: algo salió mal");
+                }
+
+            } else if (!this.vistaHome.TxtCodigoProy.getText().equals("")) {
+
+                if (mo.ActualizarPiezaProyecto(codProy, nomP, precP, descP, cantP, nomPr, apePr, direcPr, codP)) {
+                    JOptionPane.showMessageDialog(this.vistaHome, "Exito: Pieza del proyeto: " + codProy + " actualizada con éxito.");
+                    this.vistaHome.TablePiezas.setModel(mo.getTablaPiezasRelacionadas(this.vistaHome.TxtCodigoProy.getText()));
+                } else {
+                    JOptionPane.showMessageDialog(this.vistaHome, "Error: algo salió mal");
+                }
+
             }
+
         }
-        //DELETE PIEZAS
+        //DELETE PIEZAS DE TABLADEPIEZAS O DE UN PROYECTO
         if (e.getSource() == this.vistaHome.BtnBorraPieza) {
             String codP, codProy;
-
             codP = this.vistaHome.TxtCodigoPieza.getText();
             codProy = this.vistaHome.TxtCodigoProy.getText();
-            if (mo.BorrarPieza(codP, codProy)) {
-                JOptionPane.showMessageDialog(this.vistaHome, "Exito: Pieza borrada con éxito.");
-                this.refrescar();
-            } else {
-                JOptionPane.showMessageDialog(this.vistaHome, "Error: algo salió mal");
+
+            if (this.vistaHome.TxtCodigoProy.getText().equals("")) {
+                if (mo.BorrarPieza(codP) == true) {
+                    JOptionPane.showMessageDialog(this.vistaHome, "Exito: Pieza borrada con éxito.");
+                    this.refrescar();
+                } else {
+                    JOptionPane.showMessageDialog(this.vistaHome, "Error: algo salió mal al borrar la pieza");
+                }
+            } else if (!this.vistaHome.TxtCodigoProy.getText().equals("")) {
+                if (mo.BorrarPiezaProyecto(codP, codProy) == true) {
+                    JOptionPane.showMessageDialog(this.vistaHome, "Exito: Pieza borrada del proyeto: " + codProy + " con éxito.");
+                    this.vistaHome.TablePiezas.setModel(mo.getTablaPiezasRelacionadas(this.vistaHome.TxtCodigoProy.getText()));
+                } else {
+                    JOptionPane.showMessageDialog(this.vistaHome, "Error: algo salió mal");
+                }
             }
+
         }
 
         //CARGAR PIEZAS DE UN PROYECTO
@@ -185,16 +217,6 @@ public class controlador implements ActionListener, MouseListener {
                 JOptionPane.showMessageDialog(this.vistaHome, "Debe seleccionar un proyecto para poder cargar su tabla de piezas");
             } else {
                 this.vistaHome.TablePiezas.setModel(mo.getTablaPiezasRelacionadas(this.vistaHome.TxtCodigoProy.getText()));
-            }
-        }
-        //AGREGAR PIEZAS A PROYECTOS
-        if (e.getSource() == this.vistaHome.BtnAniadePiezaAProyec) {
-            String codProy = this.vistaHome.TxtCodigoProy.getText();
-            String codPi = this.vistaHome.TxtCodigoPieza.getText();
-            if (mo.InsertaPiezaProyecto(codPi, codProy)) {
-                JOptionPane.showMessageDialog(this.vistaHome, "Exito: Pieza Agregada a Proyecto");
-            } else {
-                JOptionPane.showMessageDialog(this.vistaHome, "Error: algo salió mal");
             }
         }
 
@@ -209,8 +231,9 @@ public class controlador implements ActionListener, MouseListener {
             this.vistaHome.TxtNombreProveedor.setText("");
             this.vistaHome.TxtApellidosProveedor.setText("");
             this.vistaHome.TxtDirecProveedor.setText("");
+            this.refrescar();
         }
-        /*----------------------------------------------------------------------------*/
+
         //Botón de Salir
         if (e.getSource() == this.vistaHome.btnSalir) {
             Object[] opciones = {"Aceptar", "Cancelar"}; //Es un array para guardar las dos opciones
