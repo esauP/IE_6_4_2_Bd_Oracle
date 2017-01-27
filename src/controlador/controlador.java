@@ -5,10 +5,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.sql.SQLException;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.table.DefaultTableCellRenderer;
 import modelo.Modelo;
 import vista.*;
 
@@ -69,14 +72,20 @@ public class controlador implements ActionListener, MouseListener {
         this.vistaHome.TableProyectos.setModel(mo.getTablaProyectos());
         this.vistaHome.TableProyectos.setDefaultRenderer(Object.class, new MiRender());
         this.vistaHome.TableProyectos.getTableHeader().setReorderingAllowed(false);
+        ((DefaultTableCellRenderer) this.vistaHome.TableProyectos.getDefaultRenderer(String.c‌lass)).setHorizontal‌Alignment(JLabel.CENTER);//centramos el texto dentro de las celdas de la tabla
+        this.vistaHome.TableProyectos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);//le damos la propiedad a la tabla para que solo se pueda seleccionar un registro
+                
         this.vistaHome.TablePiezas.addMouseListener(this);
         this.vistaHome.TablePiezas.setModel(mo.getTablaPiezas());
         this.vistaHome.TablePiezas.setDefaultRenderer(Object.class, new MiRender());
         this.vistaHome.TablePiezas.getTableHeader().setReorderingAllowed(false);
+        ((DefaultTableCellRenderer) this.vistaHome.TablePiezas.getDefaultRenderer(String.c‌lass)).setHorizontal‌Alignment(JLabel.CENTER);//centramos el texto dentro de las celdas de la tabla
+        this.vistaHome.TablePiezas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);//le damos la propiedad a la tabla para que solo se pueda seleccionar un registro
 
     }
 
     //Control de eventos de los controles que tienen definido un "ActionCommand"
+    @Override
     public void actionPerformed(ActionEvent e) {
 
         /*----------------------------------------------------------------------------*/

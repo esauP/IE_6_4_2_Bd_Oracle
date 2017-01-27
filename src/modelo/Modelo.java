@@ -356,7 +356,6 @@ public class Modelo extends database {
      * @param descP DESCRIPCION PIEZA
      * @param precP PRECIO PIEZA
      * @param cantP CANTIDAD PIEZA
-     * @param codPr CODIGO PROVEEDOR
      * @param nomPr NOMBRE PROVEEDOR
      * @param apePr APELLIDOS PROVEEDOR
      * @param direcPr DIRECCION PROVEEDOR
