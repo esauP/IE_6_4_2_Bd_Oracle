@@ -13,11 +13,8 @@ import modelo.Modelo;
 import vista.*;
 
 /**
- * Clase controlador que se encargará de oir los eventos ocurridos en las vistas
- * y llamar a los métodos y funciones contenidas en el Modelo
  *
- * @author Víctor. Proyecto taller.
- * @version 1.0
+ * @author Esau Perez y Víctor Cárdenas
  */
 public class controlador implements ActionListener, MouseListener {
 
@@ -64,13 +61,19 @@ public class controlador implements ActionListener, MouseListener {
         this.vistaHome.BtnActualizaPieza.addActionListener(this);
         this.vistaHome.BtnBorraPieza.addActionListener(this);
         this.vistaHome.BtnLimpiaTxtPieza.addActionListener(this);
+        this.vistaHome.BtnCargarPiezasDelProyecto.addActionListener(this);
 
         this.vistaHome.btnSalir.addActionListener(this);
 
         this.vistaHome.TableProyectos.addMouseListener(this);
         this.vistaHome.TableProyectos.setModel(mo.getTablaProyectos());
+        this.vistaHome.TableProyectos.setDefaultRenderer(Object.class, new MiRender());
+        this.vistaHome.TableProyectos.getTableHeader().setReorderingAllowed(false);
         this.vistaHome.TablePiezas.addMouseListener(this);
         this.vistaHome.TablePiezas.setModel(mo.getTablaPiezas());
+        this.vistaHome.TablePiezas.setDefaultRenderer(Object.class, new MiRender());
+        this.vistaHome.TablePiezas.getTableHeader().setReorderingAllowed(false);
+
     }
 
     //Control de eventos de los controles que tienen definido un "ActionCommand"
@@ -173,6 +176,19 @@ public class controlador implements ActionListener, MouseListener {
                 JOptionPane.showMessageDialog(this.vistaHome, "Error: algo salió mal");
             }
         }
+
+        //CARGAR PIEZAS DE UN PROYECTO
+        if (e.getSource() == this.vistaHome.BtnCargarPiezasDelProyecto) {
+
+            if (this.vistaHome.TxtCodigoProy.getText().equals("")) {
+                JOptionPane.showMessageDialog(this.vistaHome, "Debe seleccionar un proyecto para poder cargar su tabla de piezas");
+            } else {
+                this.vistaHome.TablePiezas.setModel(mo.getTablaPiezasRelacionadas(this.vistaHome.TxtCodigoProy.getText()));
+            }
+
+        }
+
+        //LIMPIAR CUADROS DE TEXTOS DE PROYECTOS
         if (e.getSource() == this.vistaHome.BtnLimpiaTxtPieza) {
             this.vistaHome.TxtCodigoPieza.setText("");
             this.vistaHome.TxtNombrePieza.setText("");
@@ -205,7 +221,7 @@ public class controlador implements ActionListener, MouseListener {
         {
             int fila = this.vistaHome.TableProyectos.rowAtPoint(e.getPoint());
             if (fila > -1) {
-                this.vistaHome.TablePiezas.setModel(mo.getTablaPiezasRelacionadas(String.valueOf(this.vistaHome.TableProyectos.getValueAt(fila, 0))));
+                //this.vistaHome.TablePiezas.setModel(mo.getTablaPiezasRelacionadas(String.valueOf(this.vistaHome.TableProyectos.getValueAt(fila, 0))));
                 this.vistaHome.TxtCodigoProy.setText(String.valueOf(this.vistaHome.TableProyectos.getValueAt(fila, 0)));
                 this.vistaHome.TxtNombreProy.setText(String.valueOf(this.vistaHome.TableProyectos.getValueAt(fila, 1)));
                 this.vistaHome.TxtCiudadProy.setText(String.valueOf(this.vistaHome.TableProyectos.getValueAt(fila, 2)));

@@ -4,10 +4,8 @@ import java.sql.SQLException;
 import vista.*;
 
 /**
- * Programa para gestionar talleres.
  *
- * @author Victor
- * @version 1.0
+ * @author Esau Perez y Víctor Cárdenas
  */
 public class main {
 

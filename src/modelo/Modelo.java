@@ -10,11 +10,8 @@ import java.util.Arrays;
 import javax.swing.table.DefaultTableModel;
 
 /**
- * Clase modeloCliente que contiene los métodos con sus algoritmos o llamadas a
- * rutinas plsql
  *
- * @author Víctor. Proyecto taller.
- * @version 1.0
+ * @author Esau Perez y Víctor Cárdenas
  */
 public class Modelo extends database {
 
@@ -150,7 +147,7 @@ public class Modelo extends database {
 
         try {
             s = this.getConexion().createStatement();
-            rs = s.executeQuery("Select PI.CODIGOPI, PI.NOMBRE, PI.PRECIO, PI.DESCRIPCION, PI.CANTIDAD, PI.PROVEEDOR.CODIGOPO, PI.PROVEEDOR.NOMBRE, PI.PROVEEDOR.APELLIDOS, PI.PROVEEDOR.DIREC From TABLA_PROYECTOS P, Table(P.PIEZASPROYECTO) PI");
+            rs = s.executeQuery("Select PI.CODIGOPI, PI.NOMBRE, PI.PRECIO, PI.DESCRIPCION, PI.CANTIDAD, PI.PROVEEDOR.CODIGOPO, PI.PROVEEDOR.NOMBRE, PI.PROVEEDOR.APELLIDOS, PI.PROVEEDOR.DIREC From TABLADEPIEZAS PI");
             ResultSetMetaData rsMd = rs.getMetaData();
             //La cantidad de columnas que tiene la consulta
             int cantidadColumnas = rsMd.getColumnCount();
