@@ -25,37 +25,6 @@ public class Modelo extends database {
     }
 
     /**
-     *
-     * @param nombre nombre del cliente
-     * @return devuelve si está o no relleno el campo del nombre del cliente
-     */
-    public boolean validarCliente(String nombre) {
-        boolean exito = false;
-        if ("".equals(nombre)) {
-            exito = false;
-        } else {
-            exito = true;
-        }
-        return exito;
-    }
-
-    /**
-     * Método para validar que se ha introducido texto en el campo
-     *
-     * @param telefono del cliente
-     * @return devuelve si está o no relleno el campo de telefono del cliente
-     */
-    public boolean validarTelefono(String telefono) {
-        boolean exito = false;
-        if ("".equals(telefono)) {
-            exito = false;
-        } else {
-            exito = true;
-        }
-        return exito;
-    }
-
-    /**
      * Obtiene registros de la tabla cliente y los devuelve en un
      * DefaultTableMode
      *
@@ -236,6 +205,7 @@ public class Modelo extends database {
             cStmt.execute();
             return true;
         } catch (SQLException e) {
+            System.out.println(e.getMessage());
             return false;
         }
     }
@@ -261,6 +231,7 @@ public class Modelo extends database {
             cStmt.execute();
             return true;
         } catch (SQLException e) {
+            System.out.println(e.getMessage());
             return false;
         }
     }
@@ -282,6 +253,7 @@ public class Modelo extends database {
             cStmt.execute();
             return true;
         } catch (SQLException e) {
+            System.out.println(e.getMessage());
             return false;
         }
     }
@@ -344,6 +316,7 @@ public class Modelo extends database {
             cStmt.execute();
             return true;
         } catch (SQLException e) {
+            System.out.println(e.getMessage());
             return false;
         }
     }
