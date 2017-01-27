@@ -62,6 +62,7 @@ public class controlador implements ActionListener, MouseListener {
         this.vistaHome.BtnBorraPieza.addActionListener(this);
         this.vistaHome.BtnLimpiaTxtPieza.addActionListener(this);
         this.vistaHome.BtnCargarPiezasDelProyecto.addActionListener(this);
+        this.vistaHome.BtnAniadePiezaAProyec.addActionListener(this);
 
         this.vistaHome.btnSalir.addActionListener(this);
 
@@ -185,7 +186,16 @@ public class controlador implements ActionListener, MouseListener {
             } else {
                 this.vistaHome.TablePiezas.setModel(mo.getTablaPiezasRelacionadas(this.vistaHome.TxtCodigoProy.getText()));
             }
-
+        }
+        //AGREGAR PIEZAS A PROYECTOS
+        if (e.getSource() == this.vistaHome.BtnAniadePiezaAProyec) {
+            String codProy = this.vistaHome.TxtCodigoProy.getText();
+            String codPi = this.vistaHome.TxtCodigoPieza.getText();
+            if (mo.InsertaPiezaProyecto(codPi, codProy)) {
+                JOptionPane.showMessageDialog(this.vistaHome, "Exito: Pieza Agregada a Proyecto");
+            } else {
+                JOptionPane.showMessageDialog(this.vistaHome, "Error: algo salió mal");
+            }
         }
 
         //LIMPIAR CUADROS DE TEXTOS DE PROYECTOS

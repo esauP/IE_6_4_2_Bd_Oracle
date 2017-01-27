@@ -93,6 +93,11 @@ public class Modelo extends database {
         return tablemodel;
     }
 
+    /**
+     *
+     * @return DEFAULTTABLEMODEL
+     * @throws SQLException
+     */
     public DefaultTableModel getTablaPiezas2() throws SQLException {
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -138,7 +143,7 @@ public class Modelo extends database {
     /**
      * Carga de la tabla Piezas
      *
-     * @return
+     * @return DEFAULTTABLEMODEL
      */
     public DefaultTableModel getTablaPiezas() {
         DefaultTableModel tablemodel = new DefaultTableModel();
@@ -176,7 +181,7 @@ public class Modelo extends database {
      * Método para obtener piezas relacionadas dada un codigo de proyecto
      *
      * @param aux
-     * @return
+     * @return DEFAULTTABLEMODEL
      */
     public DefaultTableModel getTablaPiezasRelacionadas(String aux) {
         DefaultTableModel tablemodel = new DefaultTableModel();
@@ -210,15 +215,23 @@ public class Modelo extends database {
         return tablemodel;
     }
 
-    public boolean InsertaProyecto(String text, String text0, String text1) {
+    /**
+     * METODO USADO PARA INSERTAR PROYECTOS NUEVOS
+     *
+     * @param codProy CODIGO PROYECTO
+     * @param nomProy NOMBRE PROYECTO
+     * @param ciudadProy CIUDAD PROYECTO
+     * @return BOOLEAN
+     */
+    public boolean InsertaProyecto(String codProy, String nomProy, String ciudadProy) {
         try {
             //Llamada a la funcion
             String sql = "{call ADD_PROYECTO (?,?,?) }";
             CallableStatement cStmt = this.getConexion().prepareCall(sql);
             //establezco los parámetros de entrada
-            cStmt.setString(1, text);
-            cStmt.setString(2, text0);
-            cStmt.setString(3, text1);
+            cStmt.setString(1, codProy);
+            cStmt.setString(2, nomProy);
+            cStmt.setString(3, ciudadProy);
             //ejecuto la funcion
             cStmt.execute();
             return true;
@@ -227,15 +240,23 @@ public class Modelo extends database {
         }
     }
 
-    public boolean ActualizaProyecto(String text, String text0, String text1) {
+    /**
+     * METOD PARA ACTUALIZAR PROYECTOS EXISTENTES
+     *
+     * @param codProy
+     * @param nombProy
+     * @param ciudadProy
+     * @return BOOLEAN
+     */
+    public boolean ActualizaProyecto(String codProy, String nombProy, String ciudadProy) {
         try {
             //Llamada a la funcion
             String sql = "{call UPDATE_PROYECTO (?,?,?) }";
             CallableStatement cStmt = this.getConexion().prepareCall(sql);
             //establezco los parámetros de entrada
-            cStmt.setString(1, text);
-            cStmt.setString(2, text0);
-            cStmt.setString(3, text1);
+            cStmt.setString(1, codProy);
+            cStmt.setString(2, nombProy);
+            cStmt.setString(3, ciudadProy);
             //ejecuto la funcion
             cStmt.execute();
             return true;
@@ -244,13 +265,19 @@ public class Modelo extends database {
         }
     }
 
-    public boolean BorraProyecto(String text) {
+    /**
+     * METODO PARA ELIMINAR UN PROYECTO EXISTENTE
+     *
+     * @param codProy
+     * @return BOOLEAN
+     */
+    public boolean BorraProyecto(String codProy) {
         try {
             //Llamada a la funcion
             String sql = "{call DELETE_PROYECTO (?) }";
             CallableStatement cStmt = this.getConexion().prepareCall(sql);
             //establezco los parámetros de entrada
-            cStmt.setString(1, text);
+            cStmt.setString(1, codProy);
             //ejecuto la funcion
             cStmt.execute();
             return true;
@@ -302,7 +329,7 @@ public class Modelo extends database {
      * METODO PARA INSERTAR UNA PIEZA EN UN PROYECTO
      *
      * @param codPi CODIGO PIEZA
-     * @param codProy   CODIGO PROYECTO
+     * @param codProy CODIGO PROYECTO
      * @return BOOLEAN
      */
     public boolean InsertaPiezaProyecto(String codPi, String codProy) {
@@ -321,6 +348,21 @@ public class Modelo extends database {
         }
     }
 
+    /**
+     * METODO PARA ACTUALIZAR UNA NUEVA PIEZA
+     *
+     * @param codP CODIGO PIEZA
+     * @param nomP NOMBRE PIEZA
+     * @param descP DESCRIPCION PIEZA
+     * @param precP PRECIO PIEZA
+     * @param cantP CANTIDAD PIEZA
+     * @param codPr CODIGO PROVEEDOR
+     * @param nomPr NOMBRE PROVEEDOR
+     * @param apePr APELLIDOS PROVEEDOR
+     * @param direcPr DIRECCION PROVEEDOR
+     * @param codPro CODIGO PROYECTO
+     * @return BOOLEAN
+     */
     public boolean ActualizaPieza(String codP, String nomP, String descP, double precP, double cantP, String codPr, String nomPr, String apePr, String direcPr, String codPro) {
         Statement s;
 
@@ -338,6 +380,13 @@ public class Modelo extends database {
         }
     }
 
+    /**
+     * METODO PARA BORRAR UNA PIEZA ASOCIADA A UN PROYECTO
+     *
+     * @param codP CODIGO DE PIEZA
+     * @param codProy CODIGO DE PROYECTO
+     * @return BOOLEAN
+     */
     public boolean BorrarPieza(String codP, String codProy) {
         try {
             //Llamada a la funcion

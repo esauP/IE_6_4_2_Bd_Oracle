@@ -60,15 +60,6 @@
               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="BtnAniadePieza" min="-2" pref="161" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="BtnBorraPieza" min="-2" pref="161" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="BtnActualizaPieza" min="-2" pref="161" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="BtnLimpiaTxtPieza" min="-2" pref="161" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
                       <Component id="jLabel19" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="TxtDescripcionPi" min="-2" pref="433" max="-2" attributes="0"/>
@@ -90,7 +81,6 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="TxtDirecProveedor" min="-2" pref="145" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="jScrollPane4" alignment="0" min="-2" pref="810" max="-2" attributes="0"/>
                   <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="BtnAniadeProyecto" min="-2" pref="130" max="-2" attributes="0"/>
@@ -135,6 +125,20 @@
                       </Group>
                       <Component id="jScrollPane3" alignment="0" pref="810" max="32767" attributes="0"/>
                       <Component id="jSeparator1" alignment="0" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Component id="BtnAniadePieza" max="32767" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="BtnBorraPieza" min="-2" pref="139" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="BtnActualizaPieza" min="-2" pref="149" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="BtnLimpiaTxtPieza" min="-2" pref="143" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="BtnAniadePiezaAProyec" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="jScrollPane4" min="-2" pref="810" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace pref="24" max="32767" attributes="0"/>
@@ -200,6 +204,7 @@
                   <Component id="BtnBorraPieza" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="BtnActualizaPieza" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="BtnLimpiaTxtPieza" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="BtnAniadePiezaAProyec" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
           </Group>
@@ -382,6 +387,12 @@
     <Component class="javax.swing.JButton" name="BtnCargarPiezasDelProyecto">
       <Properties>
         <Property name="text" type="java.lang.String" value="Cargar piezas"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="BtnAniadePiezaAProyec">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="A&#xf1;adir Pieza a Proyecto"/>
+        <Property name="toolTipText" type="java.lang.String" value="Debe clickar en un proyecto y en una pieza."/>
       </Properties>
     </Component>
   </SubComponents>
